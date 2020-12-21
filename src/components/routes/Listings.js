@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
@@ -11,16 +11,25 @@ class Listings extends Component {
     }
   }
   componentDidMount () {
-    // get listing index data
+    axios(`${apiUrl}/listings`)
+      .then(res => (console.log(res.data)))
+      .then(res => this.setState({ listings: res.data.listings }))
+      .catch(console.error)
   }
   render () {
     const listings = this.state.listings.map(listing => (
-      <div key={listing.id}>
+      <li key={listing.id}>
         <Link to={`/listings/${listing._id}`}>{listing.title}</Link>
-      </div>
+      </li>
     ))
     return (
-      
+      <div>
+        <h2>Current Listings</h2>
+        <ul>
+          {listings}
+        </ul>
+      </div>
     )
   }
 }
+export default Listings
