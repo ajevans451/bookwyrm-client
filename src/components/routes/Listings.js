@@ -11,7 +11,7 @@ class Listings extends Component {
   }
   componentDidMount () {
     const { user } = this.props
-    listingIndex(this.state, user)
+    listingIndex(user)
       // .then(res => (console.log(res.data.listings)))
       .then(res => this.setState({ listings: res.data.listings }))
       .then(console.log(this.state.listings))
