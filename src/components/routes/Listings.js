@@ -19,7 +19,7 @@ class Listings extends Component {
   }
   render () {
     const listings = this.state.listings.map(listing => (
-      <li key={listing.id}>
+      <li key={listing._id}>
         <Link to={`/listings/${listing._id}`}>{listing.title}</Link>
       </li>
     ))
