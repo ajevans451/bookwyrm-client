@@ -37,6 +37,13 @@ class Listing extends Component {
     }
     return (
       <div>
+        <h4>{listing.title}</h4>
+        <p>{listing.description}</p>
+        <button onClick={this.destroy}>Delete Listing</button>
+        <Link to={`/listings/${this.props.match.params.id}/edit`}>
+          <button>Edit</button>
+        </Link>
+        <Link to="/listings">Back to listings</Link>
       </div>
     )
   }
