@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import axios from 'axios'
-
-import apiUrl from '../../apiConfig'
+import { listingShow, listingDelete } from '../../api/listing'
 
 class Listing extends Component {
   constructor (props) {
@@ -13,15 +11,19 @@ class Listing extends Component {
     }
   }
   componentDidMount () {
-    axios(`${apiUrl}/listings/${this.props.match.params.id}`)
-      .then(res => this.setState({ listing: res.data.listing }))
+    const { user, match } = this.props
+    // console.log(this.props)
+    listingShow(match.params, user)
+      .then(res => {
+        console.log(res.data)
+        this.setState({ listing: res.data.listing })
+      })
+      // .then(res => this.setState({ listing: res.data.listing }))
       .catch(console.error)
   }
   destroy = () => {
-    axios({
-      url: `${apiUrl}/listings/${this.props.match.params.id}`,
-      method: 'DELETE'
-    })
+    const { user } = this.props
+    listingDelete(this.state, user)
       .then(() => this.setState({ deleted: true }))
       .catch(console.error)
   }
@@ -39,7 +41,10 @@ class Listing extends Component {
       <div>
         <h4>{listing.title}</h4>
         <p>{listing.description}</p>
-        <button onClick={this.destroy}>Delete Listing</button>
+        <p>Buy Now for: {listing.sellPrice}</p>
+        <p>Starting bid: {listing.minStartingBid}</p>
+        <button>Place bid</button>
+        <button onClick={this.destroy}>Delete</button>
         <Link to={`/listings/${this.props.match.params.id}/edit`}>
           <button>Edit</button>
         </Link>
