@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-import apiUrl from '../../apiConfig'
+import { listingIndex } from '../../api/listing'
 
 class Listings extends Component {
   constructor (props) {
@@ -11,9 +10,11 @@ class Listings extends Component {
     }
   }
   componentDidMount () {
-    axios(`${apiUrl}/listings`)
-      .then(res => (console.log(res.data)))
+    const { user } = this.props
+    listingIndex(this.state, user)
+      // .then(res => (console.log(res.data.listings)))
       .then(res => this.setState({ listings: res.data.listings }))
+      .then(console.log(this.state.listings))
       .catch(console.error)
   }
   render () {
