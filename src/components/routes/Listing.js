@@ -22,8 +22,8 @@ class Listing extends Component {
       .catch(console.error)
   }
   destroy = () => {
-    const { user } = this.props
-    listingDelete(this.state, user)
+    const { user, match } = this.props
+    listingDelete(match.params, user)
       .then(() => this.setState({ deleted: true }))
       .catch(console.error)
   }

@@ -42,7 +42,7 @@ export const listingShow = (listing, user) => {
 export const listingDelete = (listing, user) => {
   return axios({
     method: 'DELETE',
-    url: apiUrl + '/listings/' + listing._id,
+    url: apiUrl + '/listings/' + listing.id,
     headers: {
       'Authorization': `Token token=${user.token}`
     }
