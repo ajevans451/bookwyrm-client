@@ -18,6 +18,18 @@ export const listingIndex = (user) => {
     // }
   })
 }
+export const listingCreate = (listing, user) => {
+  return axios({
+    method: 'POST',
+    url: apiUrl + '/listings',
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    },
+    data: {
+      listing: listing
+    }
+  })
+}
 export const listingShow = (listing, user) => {
   return axios({
     method: 'GET',

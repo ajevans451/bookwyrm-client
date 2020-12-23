@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import ListingForm from '../forms/ListingForm'
+import { listingCreate } from '../../api/listing'
 
 class ListingCreate extends Component {
   constructor (props) {
@@ -22,7 +23,15 @@ class ListingCreate extends Component {
     this.setState({ listing: updatedListing })
   }
   handleSubmit = event => {
+    const { user } = this.props
+    const { listing } = this.state
     event.preventDefault()
+    listingCreate(listing, user)
+      .then(res => {
+        console.log(res)
+        this.setState({ createdListingId: res.data.listing._id })
+      })
+      .catch(console.error)
   }
   render () {
     const { handleChange, handleSubmit } = this
