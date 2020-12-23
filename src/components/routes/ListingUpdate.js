@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import ListingForm from '../forms/ListingForm'
-import { listingCreate } from '../../api/listing'
+import { listingShow, listingUpdate } from '../../api/listing'
 
-class ListingCreate extends Component {
+class ListingUpdate extends Component {
   constructor (props) {
     super(props)
 
@@ -14,8 +14,19 @@ class ListingCreate extends Component {
         sellPrice: '',
         minStartingBid: ''
       },
-      createdListingId: null
+      updated: false
     }
+  }
+  componentDidMount () {
+    const { user, match } = this.props
+    // console.log(this.props)
+    listingShow(match.params, user)
+      .then(res => {
+        // console.log(res.data)
+        this.setState({ listing: res.data.listing })
+      })
+      // .then(res => this.setState({ listing: res.data.listing }))
+      .catch(console.error)
   }
   handleChange = event => {
     const updatedField = { [event.target.name]: event.target.value }
@@ -23,31 +34,32 @@ class ListingCreate extends Component {
     this.setState({ listing: updatedListing })
   }
   handleSubmit = event => {
-    const { user } = this.props
+    const { user, match } = this.props
     const { listing } = this.state
     event.preventDefault()
-    listingCreate(listing, user)
+    listingUpdate(match.params, listing, user)
       .then(res => {
         console.log(res)
-        this.setState({ createdListingId: res.data.listing._id })
+        this.setState({ updated: true })
       })
       .catch(console.error)
   }
   render () {
+    const { match } = this.props
     const { handleChange, handleSubmit } = this
-    const { createdListingId, listing } = this.state
-
-    if (createdListingId) {
-      return <Redirect to={`/listings/${createdListingId}`} />
+    const { updated, listing } = this.state
+    if (updated) {
+      return <Redirect to={`/listings/${match.params.id}`} />
     }
     return (
       <div>
         <ListingForm
           listing={listing}
           handleChange={handleChange}
-          handleSubmit={handleSubmit} />
+          handleSubmit={handleSubmit}
+        />
       </div>
     )
   }
 }
-export default ListingCreate
+export default ListingUpdate

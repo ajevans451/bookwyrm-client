@@ -39,6 +39,19 @@ export const listingShow = (listing, user) => {
     }
   })
 }
+export const listingUpdate = (params, listing, user) => {
+  console.log('this is params:', params)
+  return axios({
+    method: 'PATCH',
+    url: apiUrl + '/listings/' + params.id,
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    },
+    data: {
+      listing: listing
+    }
+  })
+}
 export const listingDelete = (listing, user) => {
   return axios({
     method: 'DELETE',

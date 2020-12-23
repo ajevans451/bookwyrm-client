@@ -15,7 +15,7 @@ class Listing extends Component {
     // console.log(this.props)
     listingShow(match.params, user)
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.setState({ listing: res.data.listing })
       })
       // .then(res => this.setState({ listing: res.data.listing }))
