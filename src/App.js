@@ -11,6 +11,7 @@ import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 import Listings from './components/routes/Listings'
 import Listing from './components/routes/Listing'
+import ListingCreate from './components/routes/ListingCreate'
 
 class App extends Component {
   constructor () {
@@ -69,6 +70,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} exact path='/listings' render={() => (
             <Listings /* msgAlert={this.msgAlert} */ user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/listing/create' render={() => (
+            <ListingCreate /* msgAlert={this.msgAlert} */ user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/listings/:id' render={({ match }) => (
             <Listing /* msgAlert={this.msgAlert} */ match={match} user={user} />

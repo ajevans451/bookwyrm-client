@@ -14,7 +14,7 @@ class Listings extends Component {
     listingIndex(user)
       // .then(res => (console.log(res.data.listings)))
       .then(res => this.setState({ listings: res.data.listings }))
-      .then(console.log(this.state.listings))
+      // .then(console.log(this.state.listings))
       .catch(console.error)
   }
   render () {
@@ -26,6 +26,7 @@ class Listings extends Component {
     return (
       <div>
         <h2>Current Listings</h2>
+        <Link to='/listing/create'>Create New Listing</Link>
         <ul>
           {listings}
         </ul>
