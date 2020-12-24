@@ -40,7 +40,7 @@ export const listingShow = (listing, user) => {
   })
 }
 export const listingUpdate = (params, listing, user) => {
-  console.log('this is params:', params)
+  // console.log('this is params:', params)
   return axios({
     method: 'PATCH',
     url: apiUrl + '/listings/' + params.id,

@@ -39,7 +39,7 @@ class ListingUpdate extends Component {
     event.preventDefault()
     listingUpdate(match.params, listing, user)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.setState({ updated: true })
       })
       .catch(console.error)

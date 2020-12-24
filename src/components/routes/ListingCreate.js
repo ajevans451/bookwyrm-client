@@ -28,7 +28,7 @@ class ListingCreate extends Component {
     event.preventDefault()
     listingCreate(listing, user)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.setState({ createdListingId: res.data.listing._id })
       })
       .catch(console.error)
