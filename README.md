@@ -30,7 +30,7 @@ This application allows the user to log in and create listings to sell their boo
 #### Unsolved Problems
 - I would like to style the application to adhere to a different color scheme.
 - I would like to implement a second resource, bid, as a child to listing.
-User Stories for future resource:
+###### User Stories for future resource:
 - As a signed-in user, I want to be able to create a bid.
 - As a signed-in user, I want to be able to delete my bid.
 
