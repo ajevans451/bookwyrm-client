@@ -14,7 +14,8 @@ class SignUp extends Component {
     this.state = {
       email: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      submitted: false
     }
   }
 
@@ -28,6 +29,8 @@ class SignUp extends Component {
     const { msgAlert, history, setUser } = this.props
 
     signUp(this.state)
+    // stop user from clicking again to prevent resubmit err
+      .then(this.setState({ submitted: true }))
       .then(() => signIn(this.state))
       .then(res => setUser(res.data.user))
       .then(() => msgAlert({
@@ -37,7 +40,7 @@ class SignUp extends Component {
       }))
       .then(() => history.push('/'))
       .catch(error => {
-        this.setState({ email: '', password: '', passwordConfirmation: '' })
+        this.setState({ email: '', password: '', passwordConfirmation: '', submitted: false })
         msgAlert({
           heading: 'Sign Up Failed with error: ' + error.message,
           message: messages.signUpFailure,
@@ -47,8 +50,14 @@ class SignUp extends Component {
   }
 
   render () {
-    const { email, password, passwordConfirmation } = this.state
-
+    const { email, password, passwordConfirmation, submitted } = this.state
+    if (submitted) {
+      return (
+        <div>
+          <h3>Signing up...</h3>
+        </div>
+      )
+    }
     return (
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
