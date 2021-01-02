@@ -76,10 +76,10 @@ class App extends Component {
             <ListingCreate /* msgAlert={this.msgAlert} */ user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/listings/:id' render={({ match }) => (
-            <Listing /* msgAlert={this.msgAlert} */ match={match} user={user} />
+            <Listing msgAlert={this.msgAlert} match={match} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/listings/:id/edit' render={({ match }) => (
-            <ListingUpdate /* msgAlert={this.msgAlert} */ match={match} user={user} />
+            <ListingUpdate msgAlert={this.msgAlert} match={match} user={user} />
           )} />
         </main>
       </Fragment>
