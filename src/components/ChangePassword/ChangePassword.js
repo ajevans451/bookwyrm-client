@@ -13,7 +13,8 @@ class ChangePassword extends Component {
 
     this.state = {
       oldPassword: '',
-      newPassword: ''
+      newPassword: '',
+      submitted: false
     }
   }
 
@@ -27,6 +28,8 @@ class ChangePassword extends Component {
     const { msgAlert, history, user } = this.props
 
     changePassword(this.state, user)
+    // stop user from clicking again to prevent resubmit err
+      .then(this.setState({ submitted: true }))
       .then(() => msgAlert({
         heading: 'Change Password Success',
         message: messages.changePasswordSuccess,
@@ -34,7 +37,7 @@ class ChangePassword extends Component {
       }))
       .then(() => history.push('/'))
       .catch(error => {
-        this.setState({ oldPassword: '', newPassword: '' })
+        this.setState({ oldPassword: '', newPassword: '', submitted: false })
         msgAlert({
           heading: 'Change Password Failed with error: ' + error.message,
           message: messages.changePasswordFailure,
@@ -44,8 +47,14 @@ class ChangePassword extends Component {
   }
 
   render () {
-    const { oldPassword, newPassword } = this.state
-
+    const { oldPassword, newPassword, submitted } = this.state
+    if (submitted) {
+      return (
+        <div>
+          <h3>Changing Password...</h3>
+        </div>
+      )
+    }
     return (
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">

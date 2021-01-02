@@ -13,7 +13,8 @@ class SignIn extends Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      submitted: false
     }
   }
 
@@ -27,6 +28,8 @@ class SignIn extends Component {
     const { msgAlert, history, setUser } = this.props
 
     signIn(this.state)
+    // stop user from clicking again to prevent resubmit err
+      .then(this.setState({ submitted: true }))
       .then(res => setUser(res.data.user))
       .then(() => msgAlert({
         heading: 'Sign In Success',
@@ -35,7 +38,7 @@ class SignIn extends Component {
       }))
       .then(() => history.push('/'))
       .catch(error => {
-        this.setState({ email: '', password: '' })
+        this.setState({ email: '', password: '', submitted: false })
         msgAlert({
           heading: 'Sign In Failed with error: ' + error.message,
           message: messages.signInFailure,
@@ -45,8 +48,14 @@ class SignIn extends Component {
   }
 
   render () {
-    const { email, password } = this.state
-
+    const { email, password, submitted } = this.state
+    if (submitted) {
+      return (
+        <div>
+          <h3>Signing in...</h3>
+        </div>
+      )
+    }
     return (
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
