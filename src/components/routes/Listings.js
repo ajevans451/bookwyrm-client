@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { listingIndex } from '../../api/listing'
+import Button from 'react-bootstrap/Button'
 
 class Listings extends Component {
   constructor (props) {
@@ -19,17 +20,25 @@ class Listings extends Component {
   }
   render () {
     const listings = this.state.listings.map(listing => (
-      <li key={listing._id}>
-        <Link to={`/listings/${listing._id}`}>{listing.title}</Link>
-      </li>
+      <div key={listing._id} className='col-4 p-3'>
+        <div className='card border-primary'>
+          <h5 className='card-header'>{listing.title}</h5>
+          <p className='card-text'>Seller: {listing.owner.email}</p>
+          <div className='card-link'>
+            <Link to={`/listings/${listing._id}`}className='btn btn-secondary'>View Listing</Link>
+          </div>
+        </div>
+      </div>
     ))
     return (
-      <div>
+      <div className='container-fluid overflow-hidden'>
         <h2>Current Listings</h2>
-        <Link to='/listing/create'>Create New Listing</Link>
-        <ul>
+        <Link to='/listing/create'>
+          <Button variant='secondary btn-lg'>Create New Listing</Button>
+        </Link>
+        <div className='row row-cols-3 g-2'>
           {listings}
-        </ul>
+        </div>
       </div>
     )
   }
