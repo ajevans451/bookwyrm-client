@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { listingShow, listingDelete } from '../../api/listing'
 // import messages from '../AutoDismissAlert/messages'
+import Button from 'react-bootstrap/Button'
 
 class Listing extends Component {
   constructor (props) {
@@ -48,7 +49,7 @@ class Listing extends Component {
           <p>{listing.description}</p>
           <p>Buy Now for: {listing.sellPrice}</p>
           <p>Starting bid: {listing.minStartingBid}</p>
-          <Link to="/listings">Back to listings</Link>
+          <Link to="/listings"><Button variant='secondary'>Back to listings</Button></Link>
         </div>
       )
     }
@@ -59,11 +60,11 @@ class Listing extends Component {
         <p>{listing.description}</p>
         <p>Buy Now for: {listing.sellPrice}</p>
         <p>Starting bid: {listing.minStartingBid}</p>
-        <button onClick={this.destroy}>Delete</button>
+        <Button variant='danger' onClick={this.destroy}>Delete</Button>
         <Link to={`/listings/${this.props.match.params.id}/edit`}>
-          <button>Edit</button>
+          <Button>Edit</Button>
         </Link>
-        <Link to="/listings">Back to listings</Link>
+        <Link to="/listings"><Button variant='secondary'>Back to listings</Button></Link>
       </div>
     )
   }

@@ -1,21 +1,22 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 const signedOutUser = (
   <Fragment>
     <p>Sign in or Sign in to get started!</p>
-    <Link to='/sign-in'>Sign In</Link>
-    <Link to='/sign-up'>Sign Up</Link>
+    <Link to='/sign-in'><Button>Sign In</Button></Link>
+    <Link to='/sign-up'><Button>Sign Up</Button></Link>
   </Fragment>
 )
 const signedInUser = (
   <Fragment>
     <p>Click below to see current book listings!</p>
-    <Link to='/listings'>Listings</Link>
+    <Link to='/listings'><Button>Listings</Button></Link>
   </Fragment>
 )
 const Home = ({ user }) => (
-  <div>
-    <h1>Welcome to Bookwrym!</h1>
+  <div className='container'>
+    <h1>Welcome to <span className='page-title'>Bookwrym!</span></h1>
     <h3>An online marketplace for your books.</h3>
     { user ? signedInUser : signedOutUser }
   </div>
