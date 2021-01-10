@@ -52,12 +52,15 @@ class ListingUpdate extends Component {
       return <Redirect to={`/listings/${match.params.id}`} />
     }
     return (
-      <div>
-        <ListingForm
-          listing={listing}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
+      <div className='row'>
+        <div className='col-sm-10 col-md-8 mx-auto mt-5'>
+          <h3>Update Listing</h3>
+          <ListingForm
+            listing={listing}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+        </div>
       </div>
     )
   }
